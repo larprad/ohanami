@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/card.css">
+    <script src="./scripts/init.js" defer></script>
+    <script src="./scripts/drag.js" defer></script>
+    <link rel="shortcut icon" href="./ressources/sakura_icon.ico">
+    <title>Ohanami</title>
+</head>
+<body>
+    <div id="menu_page">
+        <img id="sakura_deco_menu_top" src="./ressources/sakura.svg">
+        <img id="sakura_deco_menu_bottom" src="./ressources/sakura.svg">
+        <div id="menu_title">
+            <h1>OHANAMI</h1>
+            <img id="title_image" src="./ressources/elements.png" alt="elements_icon">
+            <!-- <h2> Il faut cultiver son jardin...</h2> -->
+        </div>
+        <div id="menu_selec">
+            <div id="menu_choices_box">
+                <h1 id=menu_new_game class="menu_choice">Nouvelle partie</h1>
+                <h1 id="instructions" class="menu_choice">Instructions</h1>
+                <h1 id="options" class="menu_choice">Options</h1>
+                <a href="http://www.oya.fr/?post/2019/07/07/Ohanami" target="blank"><h1 class="menu_choice">Acheter Ohanami</h1></a>
+            </div>
+        </div>
+        <div id="menu_content">
+            <div id="options_box" class="menu_box">
+                <h1>Options</h1>
+                <div class="options_line">
+                    <h2>Jardinateur :</h2>
+                    <h2 id="cpu_easy" class="options_selec">Débutant</h2>
+                    <h2 id="cpu_medium" class="options_selec">Main verte</h2>
+                    <h2 id="cpu_hard" class="options_selec">Mère nature</h2>
+                </div>
+                <div id="cpu_level_info" class="info_plus">
+                    <p id="cpu_level_info_text">- Informations sur le niveau du Jardinateur -</p>
+                </div>
+                <div class="options_line">
+                    <h2>Type de partie :</h2>
+                    <h2 id="game_flash" class="options_selec">Bouture</h2>
+                    <h2 id="game_quick" class="options_selec">Potager</h2>
+                    <h2 id="game_standard" class="options_selec">Jardin</h2>
+                </div>
+                <div id="game_type_info" class="info_plus">
+                    <p id="game_type_info_text">- Informations sur le type de partie sélectionné -</p>
+                </div>
+                <button id="options_valid">Sauvegarder et quitter</button>
+            </div>
+        </div>
+        <div id="credits">
+            <p>Un jeu de Steffen Benndorf - Edité par Oya - Programmé par Loïc La Prairie</p>
+        </div>
+    </div>
+    <div id="game_start" class='prompt'>
+        <h2>L'Automne commence.</h2>
+        <br>
+        <h3> Prenez soin de votre jardin pour qu'au Printemps venu, il rayonne !</h3>
+        <div class="info_seasons_container">
+            <div class="info_seasons_prompt">
+                <p>Points par elements pour la saison :</p>
+                <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                <p>x3</p>
+            </div>
+        </div>
+        <button id="button_game_start">Vous entrez dans votre jardin...</button>
+    </div>
+    <div id="set_end" class='prompt'>
+        <h2 id="set_end_text">La manche est terminée !</h2>
+        <br>
+        <h3 id="set_end_tips">Prenez garde aus Sakuras</h3>
+        <div id="season_winter" class="info_seasons_container">
+            <div class="info_seasons_prompt">
+                <p>Points par elements pour la saison :</p>
+                <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                <p>x3</p>
+                <img src="./ressources/grass_icon.png" alt="grass_icon" class="icon_element">
+                <p>x4</p>
+            </div>
+        </div>
+        <div id="season_spring" class="info_seasons_container">
+            <div class="info_seasons_prompt">
+                <p>Points par elements pour la saison :</p>
+                <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                <p>x3</p>
+                <img src="./ressources/grass_icon.png" alt="grass_icon" class="icon_element">
+                <p>x4</p>
+                <img src="./ressources/rock_icon.png" alt="rock_icon" class="icon_element">
+                <p>x7</p>
+                <table class="sakura_table">
+                    <tr>
+                        <td><img src="./ressources/sakura_icon.png" alt="sakura_icon" class="icon_element"></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+                        <td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15+</td>
+                    </tr>
+                    <tr>
+                        <td>Points</td><td>1</td><td>3</td><td>6</td><td>10</td><td>15</td><td>21</td><td>28</td><td>36</td>
+                        <td>45</td><td>55</td><td>66</td><td>78</td><td>91</td><td>104</td><td>120</td>
+                    </tr>
+                </table>
+            </div>    
+        </div>
+        <button id="button_end_set">Manche suivante</button>
+    </div>
+    <div id="game_end" class='prompt'>
+        <h2>Votre jardin est terminé !</h2>
+        <table id="game_score_prompt">
+            <tr>
+                <td>Jardinateur</td><td>Vous</td>
+            </tr>
+            <tr>
+                <td id="cpu_score_prompt" class="score_prompt">x</td><td id="player_score_prompt" class="score_prompt">x</td>
+            </tr>
+        </table>
+        <img id="cpu_win_img" class="win_img" src="./ressources/cpu_icon.svg" alt="CPU">
+        <img id="player_win_img" class="win_img" src="./ressources/player_icon.svg" alt="CPU">
+        <h2 id="winner">winner</h2>
+        <br>
+        <h3 id="winner_txt">winner text</h3>
+        <br>
+        <button id="button_end_match_menu">retour au menu</button>
+        <button id="button_end_match_retry">Créer un nouveau jardin</button>
+    </div>
+    <div id="sakura_prompt" class='prompt'>
+        <table class="sakura_table">
+            <tr>
+                <td><img src="./ressources/sakura_icon.png" alt="sakura_icon" class="icon_element"></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+                <td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15+</td>
+            </tr>
+            <tr>
+                <td>Points</td><td>1</td><td>3</td><td>6</td><td>10</td><td>15</td><td>21</td><td>28</td><td>36</td>
+                <td>45</td><td>55</td><td>66</td><td>78</td><td>91</td><td>104</td><td>120</td>
+            </tr>
+        </table>
+    </div>
+    <div id="instructions_prompt" class='prompt'>
+        <button id="close_instructions">Revenir au jeu</button>
+        <div id="instructions_container" class="instructions_format">
+            <h1>Instructions</h1>
+            <br>
+            <h2>But du jeu</h2>
+            <p>Vous avez 3 jardins Zen japonnais à amenager.</p>
+            <br>
+            <p>Saurez-vous placer les points d'eau, végétation, pierres et Sakuras en harmonie pour remporter le concours des jardiniers ?</p>
+            <h2>Contenu</h2>
+            <p>Le jeu comporte <span class="bold">120 cartes</span> réparties en différents types : <span class="water">eau</span> (x34), <span class="grass">vegetation</span> (x35) <span class="rock">pierre</span> (x17) et <span class="sakura">sakura</span> (x34).</p>
+            <div class="instructions_cards_container">
+                <img src="./ressources/card_water.png" alt="Carte Eau" class="cardstruction">
+                <img src="./ressources/card_grass.png" alt="Carte Vegetation" class="cardstruction">
+                <img src="./ressources/card_rock.png" alt="Carte Pierre" class="cardstruction">
+                <img src="./ressources/card_sakura.png" alt="Carte Sakura" class="cardstruction">
+            </div>
+            <h2>Déroulement</h2>
+            <h3>-  Présentation  -</h3>
+            <p>La partie se joue en <span class="bold">3 saisons</span>, pendant lesquelles les joueurs vont former 3 jardins devant eux : 3 colonnes de cartes qui grandiront au fil des saisons.</p>
+            <br>
+            <div class="instructions_cards_container">
+                <img src="./ressources/instruct_main.png" alt="Un jardin" class="instruct_img">
+            </div>
+            <p> Notez bien qu'au début de la 2ème et 3ème saisons <span class="bold">les cartes dejà présentes dans les jardins resteront en place</span> (leurs points seront donc pris en compte à la fin de chaque saison).</p>
+            <h3>-  Tour de jeu  -</h3>
+            <p>Au début de chaque saison, les joueurs se voient distribuer 10 cartes. Chacun leur tour les joueurs devront sélectionner 2 cartes et les placer sur l'un de leur jardin en respectant les règles suivantes.</p>
+            <div class="instructions_cards_container">
+                <img src="./ressources/instruct_playcard.png" alt="Jouer une carte" class="instruct_img">
+            </div>
+            <h3>-  Placer une carte sur un jardin  -</h3>
+            
+            <div class="instructions_cards_container">
+                <img id=example src="./ressources/example.png" alt="Exemple">
+                <div>
+                    <ul>
+                        <li>Dans un jardin vide, on peut placer n'importe quelle carte.</li>
+                        <li>Une carte ne peut être placée qu'en dessous de la plus petite, ou au dessus de la plus grande carte du jardin.</li>
+                        <li>Les cartes d'un même jardin doivent respecter un ordre chronologique.</li>
+                        <li>Si la carte ne peut être posée sur aucun jardin (ou que le joueur ne souhaite pas la poser) il peut decider de la jeter au composte.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class='example'>
+                <p><span class="bold">Exemple : </span>Dans le jardin se trouve les cartes <span class="water">63</span>, <span class="sakura">77</span> et <span class="grass">86</span>.</p>
+                <br><br>
+                    <p>La carte <span class="grass">52</span> peut être placée en dessous du <span class="water">63</span>.</p><br>
+                    <p>La carte <span class="rock">102</span> au-dessus de la carte <span class="grass">86</span>.</p><br>
+                    <p>La carte <span class="sakura">72</span> ne peut pas être placée dans ce jardin, elle devra l'être dans un des 2 autres ou être envoyée au composte.</p><br>
+            </div>
+            <h3>-  Echanger sa main avec le Jardinateur  -</h3>
+            <p>Lorsque que 2 cartes ont été jouées, les 2 joueurs échangent automatiquement leurs mains, et le tour suivant peut commencer.</p>
+            <br>
+            <p class='bold'>Lors de votre 2ième tour, et des suivants, vous jouerez donc avec les restes de la main du Jardinateur, et lui avec la votre !</p>
+            <p>Lorsque les joueurs n'ont plus de cartes en mains, la saison est terminée, les points de chaque jardin sont calculés et on passe à la saison suivante.</p>
+            <h2>Décompte des points et fin du jeu</h3>
+            <div class="instructions_points">
+                <div class="info_seasons_container"">
+                    <h4>Automne :</h4>
+                    <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                    <p>x3 points</p>
+                </div>
+            </div>
+            <div class="instructions_points">
+                <div class="info_seasons_container">
+                    <h4>Hiver :</h4>
+                    <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                    <p>x3 points,</p>
+                    <img src="./ressources/grass_icon.png" alt="grass_icon" class="icon_element">
+                    <p>x4 points</p>
+                </div>
+            </div>
+            <div class="instructions_points"">
+                <div class="info_seasons_container">
+                    <h4>Printemps :</h4>
+                    <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                    <p>x3 points,</p>
+                    <img src="./ressources/grass_icon.png" alt="grass_icon" class="icon_element">
+                    <p>x4 points,</p>
+                    <img src="./ressources/rock_icon.png" alt="rock_icon" class="icon_element">
+                    <p>x7 points,</p>
+                    <img src="./ressources/sakura_icon.png" alt="sakura_icon" class="icon_element">
+                    <p>voir tableau</p>
+                </div>
+            </div>
+            <table class="sakura_table">
+                    <tr>
+                        <td><img src="./ressources/sakura_icon.png" alt="sakura_icon" class="icon_element"></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+                        <td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15+</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Points</td><td>1</td><td>3</td><td>6</td><td>10</td><td>15</td><td>21</td><td>28</td><td>36</td>
+                        <td>45</td><td>55</td><td>66</td><td>78</td><td>91</td><td>104</td><td>120</td>
+                    </tr>
+            </table>
+            <p>Pour determiner le vainqueur, on fait la somme de tous les points gagnés pendant les 3 saisons, le joueur avec le plus de points remporte la partie.</p>
+            <h3>Bonne chance !</h3>
+        </div>
+    </div>
+    <div id="space_game">
+        <img id="sakura_deco" src="./ressources/sakura.svg" alt="Sakura">
+        <div id="space_cpu">
+            <div id="space_cpu_label" class="space_label">
+                <div class="icon_player">
+                    <img src="./ressources/cpu_icon.svg" alt="CPU">
+                </div>
+                <div class ="score autumn">
+                    <h3>Automne</h3>
+                    <h3 id="cpu_score_1">0</h3>
+                </div>
+                <div class ="score winter">
+                    <h3>Hiver</h3>
+                    <h3 id="cpu_score_2">0</h3>
+                </div>
+                <div class ="score spring">
+                    <h3>Printemps</h3>
+                    <h3 id="cpu_score_3">0</h3>
+                </div>
+                <div class ="score total">
+                    <h3>Jardin</h3>
+                    <h2 id="cpu_score_total">0</h2>
+                </div>
+            </div>
+            <div id="space_cpu_cards" class="space_cards">
+                <div id="card_c_0" class="card">
+                    
+                </div>
+                <div id="card_c_1" class="card">
+                    
+                </div>
+                <div id="card_c_2" class="card">
+                    
+                </div>
+                <div id="card_c_3" class="card">
+                    
+                </div>
+                <div id="card_c_4" class="card">
+                    
+                </div>
+                <div id="card_c_5" class="card">
+                    
+                </div>
+                <div id="card_c_6" class="card">
+                    
+                </div>
+                <div id="card_c_7" class="card">
+                    
+                </div>
+                <div id="card_c_8" class="card">
+                    
+                </div>
+                <div id="card_c_9" class="card">
+                    
+                </div>
+            </div>
+            <div id="space_cpu_garden" class="space_garden">
+                <div id="gard_c_0" class="card garden">
+                    
+                </div>
+                <div id="gard_c_1" class="card garden">
+                    
+                </div>
+                <div id="gard_c_2" class="card garden">
+                    
+                </div>
+                <div id="trash_c" class="trash" >
+                    
+                </div>
+            </div>
+        </div>
+        <div id="space_player">
+            <div id="space_player_label" class="space_label">
+                <div class="icon_player">
+                    <img src="./ressources/player_icon.svg" alt="Player">
+                </div>
+                <div  class ="score autumn">
+                    <h3>Automne</h3>
+                    <h3 id="player_score_1">0</h3>
+                </div>
+                <div  class ="score winter">
+                    <h3>Hiver</h3>
+                    <h3 id="player_score_2">0</h3>
+                </div>
+                <div  class ="score spring">
+                    <h3>Printemps</h3>
+                    <h3 id="player_score_3">0</h3>
+                </div>
+                <div class ="score total">
+                    <h3>Jardin</h3>
+                    <h2 id="player_score_total">0</h2>
+                </div>
+            </div>
+            <div id="space_player_cards" class="space_cards">
+                <div id="card_p_0" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_1" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_2" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_3" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_4" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_5" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_6" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_7" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_8" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+                <div id="card_p_9" class="card cardHover pointer" draggable="true">
+                    
+                </div>
+            </div>
+            <div id="space_player_garden" class="space_garden">
+                <div id="gard_p_0" class="card garden pointer drop">
+                    
+                </div>
+                <div id="gard_p_1" class="card garden pointer drop">
+                    
+                </div>
+                <div id="gard_p_2" class="card garden pointer drop">
+                    
+                </div>
+                <div id="trash_p" class="trash pointer drop" >
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="space_info">
+        <div class="info_container_global">
+            <div class="info_container">
+                <h5>Jardinateur :</h5>
+                <p> </p>
+                <h3 id="cpu_level">*</h3>
+            </div>
+            <div class="info_container">
+                <h5>partie :</h5>
+                <p> </p>
+                <h3 id="game_type">*</h3>
+            </div>
+        </div> 
+        <div id="info">
+            <div class="info_seasons">
+                <h3>Automne</h3>
+                <div class="info_seasons_container">
+                    <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                    <p>x3</p>
+                </div>
+            </div>
+            <div class="info_seasons">
+                <h3>Hiver</h3>
+                <div class="info_seasons_container">
+                    <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                    <p>x3</p>
+                    <img src="./ressources/grass_icon.png" alt="grass_icon" class="icon_element">
+                    <p>x4</p>
+                </div>
+            </div>
+            <div class="info_seasons">
+                <h3>Printemps</h3>
+                <div class="info_seasons_container">
+                    <img src="./ressources/water_icon.png" alt="water_icon" class="icon_element">
+                    <p>x3</p>
+                    <img src="./ressources/grass_icon.png" alt="grass_icon" class="icon_element">
+                    <p>x4</p>
+                    <img src="./ressources/rock_icon.png" alt="rock_icon" class="icon_element">
+                    <p>x7</p>
+                    <img src="./ressources/sakura_icon.png" alt="sakura_icon" class="icon_element">
+                    <button id="button_sakura">. . .</button>
+                </div>
+        </div>
+        </div>
+        <div id="command">
+            <button id="button_instructions">Instructions</button>
+            <button id="button_reset">Recommencer</button>
+            <button id="button_menu">Quitter</button>
+        </div>
+    </div>
+    <div id="resize" class="full_screen">
+        <h3>Impossible d'afficher le jeu !</h3> <br>
+        <p>La fenêtre d'affichage est trop petite...</p>
+    </div>
+    <div id="display_blur" class="full_screen">
+     <!-- NOBODY HERE-->   
+    </div>
+</body>
+</html>
